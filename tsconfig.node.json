@@ -1,0 +1,24 @@
+{
+  "extends": "@tsconfig/node20/tsconfig.json",
+  "include": [
+    "vite.config.*",
+    "vitest.config.*",
+    "cypress.config.*",
+    "nightwatch.conf.*",
+    "playwright.config.*"
+  ],
+  "compilerOptions": {
+    "composite": true,
+    "noEmit": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "es2022", // Match the target to a compatible ECMAScript version
+    "module": "es2022",
+    "moduleResolution": "node", // Change moduleResolution to "node"
+    "types": [
+      "node",
+      "vite/client"
+    ],
+    "allowSyntheticDefaultImports": true, // Add this line if needed
+    "esModuleInterop": true // Add this line if needed
+  }
+}

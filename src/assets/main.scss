@@ -1,0 +1,75 @@
+// Customize your variables before importing Bootstrap
+
+// src/assets/custom.scss
+$primary: #5f3505;
+$secondary: #bbbbbb;
+$alternate: #7e4505ab;
+// main.scss
+
+.sidebar .nav-link {
+  cursor: pointer;
+}
+.nav-link.active {
+  /* font-weight: bold; */
+  color: white !important;
+  background-color: $alternate;
+}
+
+.swal2-container {
+  z-index: 20000;
+}
+
+.my-swal-title {
+  color: $primary; // Example primary color (Bootstrap primary color)
+}
+
+.my-swal-confirm-button {
+  background-color: $primary;
+  border-radius: 20%;
+  padding: 5px 10px;
+  color: white;
+}
+
+.my-swal-cancel-button {
+  background-color: $secondary;
+  border-radius: 20%;
+  padding: 5px 10px;
+  color: white;
+}
+
+.nav-link:hover {
+  background-color: $alternate;
+  color: white;
+}
+
+button.btn-bon {
+  background-color: #e05b03;
+  color: white;
+}
+button.btn-fpa {
+  background-color: #03ace0;
+  color: white;
+}
+button.btn-ptj {
+  background-color: #57a301;
+  color: white;
+}
+button.btn-bon:hover {
+  background-color: #e05b03;
+  color: white;
+}
+button.btn-fpa:hover {
+  background-color: #03ace0;
+  color: white;
+}
+button.btn-ptj:hover {
+  background-color: #57a301;
+  color: white;
+}
+
+.large-swal {
+  width: 1200px !important; /* Customize the width */
+  max-width: 100%; /* Optional: limit the width to 90% of the screen */
+}
+
+@import "bootstrap/scss/bootstrap";
