@@ -125,139 +125,16 @@ export default defineComponent({
           userProfile.value.firstName.length > 15
             ? userProfile.value.firstName.substring(0, 25) + "...."
             : userProfile.value.firstName;
-        if (
-          userProfile.value &&
-          userProfile.value.sub_unit_id != null &&
-          userProfile.value.unit_id != null
-        ) {
-          menus.value = [
-            {
-              title: "Anggaran Pengeluaran",
-              subMenus: [{ title: "Daftar RKAT", path: "/rkat/index" }],
-            },
-            {
-              title: "Realisasi",
-              subMenus: [
-                { title: "Daftar Proposal", path: "/apbi/index" },
-                { title: "Daftar Bon", path: "/bon/index" },
-                { title: "Daftar FPA", path: "/fpa/index" },
-                { title: "Daftar PTJ", path: "/ptj/index" },
-              ],
-            },
-            {
-              title: "Akuntansi",
-              subMenus: [
-                { title: "Bukti Memorial", path: "/akuntansi/memorial/index" },
-              ],
-            },
-            // Add more menu items here as needed
-          ];
-        } else if (
-          userProfile.value &&
-          userProfile.value.sub_unit_id == null &&
-          userProfile.value.unit_id != null
-        ) {
-          menus.value = [
-            {
-              title: "Anggaran Pendapatan",
-              subMenus: [
-                { title: "Plafon Unit", path: "/anggaran/plafon-unit" },
-              ],
-            },
-            {
-              title: "Anggaran Pengeluaran",
-              subMenus: [{ title: "Daftar RKAT", path: "/rkat/index" }],
-            },
-            //{
-            //title: "Realisasi",
-            //subMenus: [
-            //{ title: "Daftar Proposal", path: "/apbi/index" },
-            //  { title: "Daftar Bon", path: "/bon/index" },
-            //    { title: "Daftar FPA", path: "/fpa/index" },
-            //    { title: "Daftar PTJ", path: "/ptj/index" },
-            //  ],
-            //},
-            // Add more menu items here as needed
-          ];
-        } else {
+        if (userProfile.value) {
           menus.value = [
             {
               title: "Master Data",
               subMenus: [
                 { title: "User dan Role", path: "/masterdata/user" },
-                { title: "Unit", path: "/masterdata/unit" },
-                { title: "Periode", path: "/masterdata/periode" },
-                { title: "Validasi", path: "/masterdata/validasi" },
-                { title: "KPKS, IKS, dan Kegiatan", path: "/masterdata/kpks" },
-                { title: "SDGs", path: "/masterdata/sdg" },
-                { title: "Batasan Bon", path: "/masterdata/batasbon" },
+                { title: "rooms", path: "/masterdata/rooms" },
               ],
             },
-            {
-              title: "Chart of Account",
-              subMenus: [
-                { title: "Kode CoA", path: "/coa/kode" },
-                { title: "Chart of Account", path: "/coa/akun" },
-              ],
-            },
-            {
-              title: "Anggaran Pendapatan",
-              subMenus: [
-                { title: "Asumsi Pendapatan", path: "/anggaran/asumsi" },
-                { title: "Plafon Universitas", path: "/anggaran/plafon-univ" },
-                // { title: "Plafon Unit", path: "/anggaran/plafon-unit" },
-              ],
-            },
-            {
-              title: "Anggaran Pengeluaran",
-              subMenus: [{ title: "Daftar RKAT", path: "/rkat/index" }],
-            },
-            {
-              title: "Realisasi",
-              subMenus: [
-                { title: "Daftar Proposal", path: "/apbi/index" },
-                { title: "Daftar Bon", path: "/bon/index" },
-                { title: "Daftar FPA", path: "/fpa/index" },
-                { title: "Daftar PTJ", path: "/ptj/index" },
-                { title: "Transfer Dana", path: "/transfer/index" },
-              ],
-            },
-            {
-              title: "Akuntansi",
-              subMenus: [
-                { title: "Bukti Memorial", path: "/akuntansi/memorial/index" },
-              ],
-            },
-            {
-              title: "Penjurnalan",
-              subMenus: [
-                { title: "Umum", path: "/jurnal/umum/index" },
-                {
-                  title: "Buku Besar Umum",
-                  path: "/jurnal/buku-besarUmum/index",
-                },
-                // {title: "Buku Besar Anggaran", path:"/jurnal/buku-besarAnggaran/index"},
-                {
-                  title: "Posisi Anggaran",
-                  path: "/jurnal/posisi-anggaran/index",
-                },
-                { title: "Neraca Saldo", path: "/jurnal/neraca-saldo/index" },
-              ],
-            },
-            {
-              title: "Pelaporan",
-              subMenus: [
-                {
-                  title: "Penghasilan Komprehensif",
-                  path: "/laporan/penghasilan-komprehensif/index",
-                },
-                {
-                  title: "Posisi Keuangan",
-                  path: "/laporan/posisi-keuangan/index",
-                },
-                { title: "Aset Neto", path: "/laporan/aset-neto/index" },
-              ],
-            },
+
             // Add more menu items here as needed
           ];
         }
