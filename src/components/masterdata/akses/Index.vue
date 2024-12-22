@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <h3 style="display: inline-block">User Akses &nbsp</h3>
-    <SettingIcon />
     <br />
     <div class="btn btn-sm btn-secondary" @click="backButton()">Kembali</div>
     <div class="btn btn-sm btn-success ms-2" @click="saveButton()">
@@ -110,7 +109,6 @@ import config from "@/config";
 
 export default defineComponent({
   components: {
-    SettingIcon,
     DataTable,
   },
   props: {

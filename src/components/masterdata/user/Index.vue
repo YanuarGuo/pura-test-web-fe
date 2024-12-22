@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <h3 style="display: inline-block">Master Data Pengguna &nbsp</h3>
-    <SettingIcon />
     <br />
     <router-link to="/masterdata/user/create">
       <div class="btn btn-sm btn-primary">Tambah User</div>
@@ -28,7 +27,6 @@ import config from "@/config";
 
 export default defineComponent({
   components: {
-    SettingIcon,
     DataTable,
   },
   setup() {

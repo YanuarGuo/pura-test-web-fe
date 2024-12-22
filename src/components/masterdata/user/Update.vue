@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <h3 style="display: inline-block">Edit Profil Pengguna &nbsp</h3>
-    <SettingIcon />
     <br />
     <router-link to="/masterdata/user">
       <div class="btn btn-sm btn-secondary">Kembali</div>
@@ -49,7 +48,6 @@ import config from "@/config";
 
 export default defineComponent({
   components: {
-    SettingIcon,
   },
   props: {
     id: {

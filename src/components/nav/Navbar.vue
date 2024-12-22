@@ -3,9 +3,7 @@
     <div>
       <router-link to="/" class="text-decoration-none">
         <div class="row ms-2 mt-3">
-          <div class="col-auto me-0">
-            <img src="/src/assets/Logo_uksw.png" width="50" />
-          </div>
+          <div class="col-auto me-0"></div>
           <div class="col-auto ms-0">
             <h5 class="text-center text-primary fw-bold mt-3 mb-4">
               SIANGKASA

@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <h3 style="display: inline-block">Tambah Role &nbsp</h3>
-    <SettingIcon />
     <br />
     <div class="btn btn-sm btn-secondary" @click="backButton()">Kembali</div>
     <hr />
@@ -46,7 +45,6 @@ import { swalWithCustomStyles } from "@/plugin/swal";
 import config from "@/config";
 export default defineComponent({
   components: {
-    SettingIcon,
   },
   setup() {
     const crypto = inject<CryptoService>("$crypto")!;

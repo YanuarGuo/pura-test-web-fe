@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <h3 style="display: inline-block">Edit Role &nbsp</h3>
-    <SettingIcon />
     <br />
     <div class="btn btn-sm btn-secondary" @click="backButton()">Kembali</div>
     <hr />
@@ -47,7 +46,6 @@ import config from "@/config";
 
 export default defineComponent({
   components: {
-    SettingIcon,
   },
   props: {
     id: {

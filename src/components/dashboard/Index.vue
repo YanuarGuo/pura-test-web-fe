@@ -1,13 +1,18 @@
 <script lang="ts">
 import Card from "@/components/card/dashboard-card.vue";
-import { defineComponent, ref, inject, onMounted, defineAsyncComponent } from "vue";
+import {
+  defineComponent,
+  ref,
+  inject,
+  onMounted,
+  defineAsyncComponent,
+} from "vue";
 import type { AuthInterface } from "@/interfaces";
 
 export default defineComponent({
   components: {
-    WavingHandIcon,
     Card,
-    BarChart: defineAsyncComponent(() => import('@/components/chart/bar.vue')),
+    BarChart: defineAsyncComponent(() => import("@/components/chart/bar.vue")),
   },
   setup() {
     const auth = inject<AuthInterface>("$auth")!;
@@ -38,7 +43,6 @@ export default defineComponent({
   <div class="dashboard">
     <h5>Selamat datang di SIANGKASA,</h5>
     <h3 style="display: inline-block">{{ fullName }}!</h3>
-    <WavingHandIcon />
     <br />
     <div class="d-flex card-section">
       <Card>
