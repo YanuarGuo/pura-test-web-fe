@@ -1,5 +1,4 @@
 <script lang="ts">
-import WavingHandIcon from "@/components/icons/waving-hand-icon.vue";
 import Card from "@/components/card/dashboard-card.vue";
 import { defineComponent, ref, inject, onMounted, defineAsyncComponent } from "vue";
 import type { AuthInterface } from "@/interfaces";

@@ -9,7 +9,6 @@ import Crypto from "./plugin/crypto";
 import auth from "./plugin/auth";
 import currency from "./plugin/currency";
 import date from "./plugin/date";
-import pagination from "./plugin/pagination";
 
 // Import Bootstrap CSS and JS
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -38,7 +37,6 @@ async function initApp() {
     app.config.globalProperties.$auth = auth;
     app.config.globalProperties.$currency = currency;
     app.config.globalProperties.$date = date;
-    app.config.globalProperties.$pagination = pagination;
 
     app.provide("$crypto", Crypto);
     app.provide("$axios", axios);
@@ -46,7 +44,6 @@ async function initApp() {
     app.provide("$date", date);
     app.provide("$router", router);
     app.provide("$auth", auth);
-    app.provide("$pagination", pagination);
     app.provide("$swal", swalWithCustomStyles);
 
     app.use(router);

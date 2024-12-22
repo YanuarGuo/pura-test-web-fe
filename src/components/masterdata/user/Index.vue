@@ -20,7 +20,6 @@
 <script lang="ts">
 import { defineComponent, inject, ref } from "vue";
 import type { Header, Item } from "vue3-easy-data-table";
-import SettingIcon from "@/components/icons/setting-icon.vue";
 import DataTable from "@/components/table/datatable.vue";
 import type { CryptoService } from "@/interfaces";
 import type { AxiosInstance } from "axios";

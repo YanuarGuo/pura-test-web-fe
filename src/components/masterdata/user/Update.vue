@@ -41,7 +41,6 @@
 
 <script lang="ts">
 import { defineComponent, ref, inject } from "vue";
-import SettingIcon from "@/components/icons/setting-icon.vue";
 import type { CryptoService } from "@/interfaces";
 import type { AxiosInstance } from "axios";
 import { swalWithCustomStyles } from "@/plugin/swal";
