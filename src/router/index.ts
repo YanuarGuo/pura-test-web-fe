@@ -3,21 +3,23 @@ import { createRouter, createWebHistory } from "vue-router";
 import crypto from "@/plugin/crypto";
 
 import LoginView from "@/views/LoginView.vue";
-import LupaPassword from "@/views/auth/LupaPassword.vue";
 import MainView from "@/views/MainView.vue";
 import Dashboard from "@/components/dashboard/Index.vue";
 import User from "@/components/masterdata/user/Index.vue";
 import Role from "@/components/masterdata/role/Index.vue";
+import Rooms from "@/components/masterdata/rooms/Index.vue";
 import auth from "@/plugin/auth";
 import UserAccess from "@/components/masterdata/akses/Index.vue";
 import maintenance from "@/components/redirect/maintenance.vue";
 
 import UserCreate from "@/components/masterdata/user/Create.vue";
 import RoleCreate from "@/components/masterdata/role/Create.vue";
+import RoomsCreate from "@/components/masterdata/rooms/Create.vue";
 
 import UserUpdate from "@/components/masterdata/user/Update.vue";
 import RoleUpdate from "@/components/masterdata/role/Update.vue";
 import UserData from "@/components/user/Update.vue";
+import RoomsUpdate from "@/components/masterdata/rooms/Update.vue";
 
 import ForbidenPage from "@/components/redirect/forbiden.vue";
 import NotFoundPage from "@/components/redirect/notFound.vue";
@@ -54,11 +56,6 @@ const router = createRouter({
           next();
         }
       },
-    },
-    {
-      path: "/lupa-password",
-      name: "lupa-password",
-      component: LupaPassword,
     },
     {
       path: "/user-update/:id",
@@ -124,6 +121,22 @@ const router = createRouter({
           path: "role",
           name: "masterdata-role",
           component: Role,
+        },
+        {
+          path: "rooms",
+          name: "masterdata-rooms",
+          component: Rooms,
+        },
+        {
+          path: "rooms/create",
+          name: "masterdata-rooms-create",
+          component: RoomsCreate,
+        },
+        {
+          path: "rooms/update/:id",
+          name: "masterdata-rooms-update",
+          component: RoomsUpdate,
+          props: true,
         },
         {
           path: "role/create",

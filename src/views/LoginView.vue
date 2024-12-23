@@ -3,7 +3,7 @@
     <div class="bg-primary h-100 w-50"></div>
     <div class="w-50">
       <div class="container">
-        <h3 class="fw-bold">Selamat Datang di SIANGKASA!</h3>
+        <h3 class="fw-bold">Selamat Datang di Sistem Peminjaman Ruang!</h3>
         <p class="text-muted mt-1 mb-3">
           Silakan masuk dengan akun yang Anda miliki
         </p>
@@ -41,9 +41,6 @@
               </div>
             </div>
           </div>
-          <RouterLink to="/lupa-password">
-            <p class="mt-0">Lupa password?</p>
-          </RouterLink>
           <button
             class="btn col-6 mx-0 px-0 btn-md btn-primary my-3"
             type="submit"
@@ -86,7 +83,6 @@ export default defineComponent({
           })
           .then((response) => {
             const token = response.data.data.token;
-            // comment for maintenance
             Cookies.set("token", crypto.setToken(token), {
               expires: 1,
               secure: true,
@@ -100,9 +96,6 @@ export default defineComponent({
                 confirmButtonText: "OK",
               })
               .then(() => {
-                // for maintenance
-                // router.push("/maintenance")
-                // for deploy
                 router.push("/");
                 location.reload();
               });

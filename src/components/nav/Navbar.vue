@@ -118,15 +118,31 @@ export default defineComponent({
     const getUserAccess = async () => {
       try {
         const userAccessAll = auth.getUserAccess();
+        console.log(userAccessAll);
+
         userProfile.value = await auth.getUserProfile();
+        console.log(userProfile.value);
+
         nama_lengkap.value =
           userProfile.value.firstName.length > 15
             ? userProfile.value.firstName.substring(0, 25) + "...."
             : userProfile.value.firstName;
-        if (userProfile.value) {
+        if (userProfile.value && userProfile.value.role == "admin") {
           menus.value = [
             {
               title: "Master Data",
+              subMenus: [
+                { title: "User dan Role", path: "/masterdata/user" },
+                { title: "rooms", path: "/masterdata/rooms" },
+              ],
+            },
+
+            // Add more menu items here as needed
+          ];
+        } else {
+          menus.value = [
+            {
+              title: "Master Data 1",
               subMenus: [
                 { title: "User dan Role", path: "/masterdata/user" },
                 { title: "rooms", path: "/masterdata/rooms" },
