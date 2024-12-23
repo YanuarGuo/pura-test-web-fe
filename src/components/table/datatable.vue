@@ -12,8 +12,63 @@
       <button class="btn btn-sm btn-warning mx-2" @click="editItem(item)">
         Edit
       </button>
+      <button
+        v-if="userProfile && userProfile.role == 'user'"
+        class="btn btn-sm btn-success mx-2"
+        @click="pinjamItem(item)"
+      >
+        Pinjam
+      </button>
       <button class="btn btn-sm btn-danger" @click="deleteItem(item)">
         Delete
+      </button>
+    </template>
+    <template #item-reservationOperation="item">
+      <button
+        v-if="
+          userProfile && userProfile.role == 'user' && item.status == 'pending'
+        "
+        class="btn btn-sm btn-warning mx-2"
+        @click="editItem(item)"
+      >
+        Edit
+      </button>
+
+      <button
+        v-if="
+          userProfile && userProfile.role == 'user' && item.status == 'pending'
+        "
+        class="btn btn-sm btn-danger"
+        @click="deleteItem(item)"
+      >
+        Delete
+      </button>
+      <button
+        v-if="
+          userProfile && userProfile.role == 'user' && item.status == 'pending'
+        "
+        class="btn btn-sm btn-success ms-2"
+        @click="callAjukan(item)"
+      >
+        Ajukan
+      </button>
+      <button
+        v-if="
+          userProfile && userProfile.role == 'admin' && item.status == 'ajukan'
+        "
+        class="btn btn-sm btn-success ms-2"
+        @click="callApiDetail(item)"
+      >
+        Diterima
+      </button>
+      <button
+        v-if="
+          userProfile && userProfile.role == 'admin' && item.status == 'ajukan'
+        "
+        class="btn btn-sm btn-danger ms-2"
+        @click="callValidasi(item)"
+      >
+        Ditolak
       </button>
     </template>
     <template #item-detailOperation="item">
@@ -45,10 +100,8 @@
         v-if="
           userAccessBm &&
           userAccessBm.is_create &&
-          ((userProfile &&
-            item.status_enum?.status === 'DIREVISI') ||
-            (item.status_enum == null &&
-              userProfile))
+          ((userProfile && item.status_enum?.status === 'DIREVISI') ||
+            (item.status_enum == null && userProfile))
         "
         class="btn btn-sm btn-warning mx-2"
         @click="editItem(item)"
@@ -556,7 +609,10 @@
       <button class="btn btn-sm btn-primary" @click="callApiDetail(item)">
         Lihat RKAT
       </button>
-      <button class="ms-2 btn btn-sm btn-secondary" @click="callApiDetailProposal(item)">
+      <button
+        class="ms-2 btn btn-sm btn-secondary"
+        @click="callApiDetailProposal(item)"
+      >
         Detail
       </button>
       <button
@@ -1072,6 +1128,7 @@ export default defineComponent({
   emits: [
     "item-edited",
     "item-deleted",
+    "item-pinjam",
     "item-detail",
     "item-detail-proposal",
     "item-ajukan",
@@ -1103,6 +1160,9 @@ export default defineComponent({
   methods: {
     editItem(item: any) {
       this.$emit("item-edited", item);
+    },
+    pinjamItem(item: any) {
+      this.$emit("item-pinjam", item);
     },
     deleteItem(item: any) {
       this.$emit("item-deleted", item); // assuming item has an id property

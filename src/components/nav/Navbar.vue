@@ -6,7 +6,7 @@
           <div class="col-auto me-0"></div>
           <div class="col-auto ms-0">
             <h5 class="text-center text-primary fw-bold mt-3 mb-4">
-              SIANGKASA
+              PEMINJAMAN RUANG
             </h5>
           </div>
         </div>
@@ -131,9 +131,12 @@ export default defineComponent({
           menus.value = [
             {
               title: "Master Data",
+              subMenus: [{ title: "rooms", path: "/masterdata/rooms" }],
+            },
+            {
+              title: "Reservasi",
               subMenus: [
-                { title: "User dan Role", path: "/masterdata/user" },
-                { title: "rooms", path: "/masterdata/rooms" },
+                { title: "reservation", path: "/transactional/reservation" },
               ],
             },
 
@@ -142,10 +145,13 @@ export default defineComponent({
         } else {
           menus.value = [
             {
-              title: "Master Data 1",
+              title: "Peminjaman",
+              subMenus: [{ title: "rooms", path: "/masterdata/rooms" }],
+            },
+            {
+              title: "Reservasi",
               subMenus: [
-                { title: "User dan Role", path: "/masterdata/user" },
-                { title: "rooms", path: "/masterdata/rooms" },
+                { title: "reservation", path: "/transactional/reservation" },
               ],
             },
 

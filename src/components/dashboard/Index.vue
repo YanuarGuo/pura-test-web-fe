@@ -41,7 +41,7 @@ export default defineComponent({
 
 <template>
   <div class="dashboard">
-    <h5>Selamat datang di SIANGKASA,</h5>
+    <h5>Selamat datang di Sistem Peminjaman Ruang,</h5>
     <h3 style="display: inline-block">{{ fullName }}!</h3>
     <br />
     <div class="d-flex card-section">

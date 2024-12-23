@@ -8,6 +8,7 @@ import Dashboard from "@/components/dashboard/Index.vue";
 import User from "@/components/masterdata/user/Index.vue";
 import Role from "@/components/masterdata/role/Index.vue";
 import Rooms from "@/components/masterdata/rooms/Index.vue";
+import Reservation from "@/components/reservation/Index.vue";
 import auth from "@/plugin/auth";
 import UserAccess from "@/components/masterdata/akses/Index.vue";
 import maintenance from "@/components/redirect/maintenance.vue";
@@ -15,11 +16,13 @@ import maintenance from "@/components/redirect/maintenance.vue";
 import UserCreate from "@/components/masterdata/user/Create.vue";
 import RoleCreate from "@/components/masterdata/role/Create.vue";
 import RoomsCreate from "@/components/masterdata/rooms/Create.vue";
+import ReservationCreate from "@/components/reservation/Create.vue";
 
 import UserUpdate from "@/components/masterdata/user/Update.vue";
 import RoleUpdate from "@/components/masterdata/role/Update.vue";
 import UserData from "@/components/user/Update.vue";
 import RoomsUpdate from "@/components/masterdata/rooms/Update.vue";
+import ReservationUpdate from "@/components/reservation/Update.vue";
 
 import ForbidenPage from "@/components/redirect/forbiden.vue";
 import NotFoundPage from "@/components/redirect/notFound.vue";
@@ -153,6 +156,40 @@ const router = createRouter({
           path: "akses/:id",
           name: "masterdata-akses",
           component: UserAccess,
+          props: true,
+        },
+      ],
+    },
+    //TRANSACTIONAL
+    {
+      path: "/transactional",
+      name: "transactional",
+      // component: MasterData,
+      beforeEnter: async (to, from, next) => {
+        let token = auth.jwtToken;
+        let access = await auth.getUserAccess();
+        if (token && access.success) {
+          next();
+        } else {
+          next({ name: "login" });
+        }
+      },
+      children: [
+        {
+          path: "reservation",
+          name: "transactional-reservation",
+          component: Reservation,
+        },
+        {
+          path: "reservation/create/:id",
+          name: "transactional-reservation-create",
+          component: ReservationCreate,
+          props: true,
+        },
+        {
+          path: "reservation/update/:id",
+          name: "transactional-reservation-update",
+          component: ReservationUpdate,
           props: true,
         },
       ],

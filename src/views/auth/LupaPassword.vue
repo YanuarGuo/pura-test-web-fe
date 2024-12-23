@@ -3,7 +3,7 @@
     <div class="bg-primary h-100 w-50"></div>
     <div class="w-50">
       <div class="container">
-        <h3 class="fw-bold">Selamat Datang di SIANGKASA!</h3>
+        <h3 class="fw-bold">Selamat Datang di Peminjaman Ruang!</h3>
         <p class="text-muted mt-1 mb-3">
           Silakan masukan email akun anda, untuk mengatur ulang password
         </p>
