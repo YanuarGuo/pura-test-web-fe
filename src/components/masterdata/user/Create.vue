@@ -14,6 +14,15 @@
           <input type="text" class="form-control" required v-model="username" />
         </div>
         <div class="col-4">
+          <label>Password : </label>
+          <input
+            type="password"
+            class="form-control"
+            required
+            v-model="password"
+          />
+        </div>
+        <div class="col-4">
           <label>Email : </label>
           <input type="text" class="form-control" required v-model="email" />
         </div>
@@ -23,13 +32,25 @@
       <div class="row">
         <div class="col-4">
           <label>Nama Depan : </label>
-          <input type="text" class="form-control" required v-model="firstName" />
+          <input
+            type="text"
+            class="form-control"
+            required
+            v-model="firstName"
+          />
         </div>
       </div>
       <div class="row mt-2">
         <div class="col-4">
           <label>Nama Belakang : </label>
           <input type="text" class="form-control" required v-model="lastName" />
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-4">
+          <label>Role : </label>
+          <input type="text" class="form-control" required v-model="role" />
+          <small class="form-text text-muted">Format: user / admin</small>
         </div>
       </div>
       <div class="row mt-2">
@@ -41,7 +62,13 @@
       <div class="row mt-2">
         <div class="col-4">
           <label>No. HP : </label>
-          <input type="tel" pattern="[0-9]{12}" class="form-control" required v-model="phoneNumber" />
+          <input
+            type="tel"
+            pattern="[0-9]{12}"
+            class="form-control"
+            required
+            v-model="phoneNumber"
+          />
           <small class="form-text text-muted">Format: 08XXXXXXXXXX</small>
         </div>
       </div>
@@ -59,8 +86,7 @@ import { useRouter } from "vue-router";
 import config from "@/config";
 
 export default defineComponent({
-  components: {
-  },
+  components: {},
   setup() {
     const crypto = inject<CryptoService>("$crypto")!;
     const axios = inject<AxiosInstance>("$axios")!;
@@ -69,8 +95,10 @@ export default defineComponent({
 
     const username = ref("");
     const email = ref("");
+    const password = ref("");
     const firstName = ref("");
     const lastName = ref("");
+    const role = ref("");
     const address = ref("");
     const phoneNumber = ref("");
 
@@ -78,9 +106,9 @@ export default defineComponent({
       const token = crypto.getToken();
 
       const userPayload = {
-        username: username,
-        password: "1sampai8",
-        email: email,
+        username: username.value,
+        password: password.value,
+        email: email.value,
       };
 
       const configRegister = {
@@ -95,36 +123,44 @@ export default defineComponent({
         },
       };
 
-      axios.post("/auth/register", userPayload, configRegister)
+      axios
+        .post("/auth/register", userPayload, configRegister)
         .then((response: any) => {
-          axios.post(
-            "/user-profiles",
-            {
-              firstName: firstName,
-              lastName: lastName,
-              address: address,
-              phoneNumber: phoneNumber,
-              id: response.data.data.id
-            },
-            configProfile
-          ).then((response: any) => {
-            swal.fire({
-              title: "Berhasil!",
-              text: "Pengguna berhasil ditambahkan",
-              icon: "success",
-              confirmButtonText: "OK",
-            }).then(() => {
-              router.go(-1);
+          axios
+            .post(
+              "/user-profiles",
+              {
+                firstName: firstName.value,
+                lastName: lastName.value,
+                address: address.value,
+                phoneNumber: phoneNumber.value,
+                role: role.value,
+                id: response.data.data.id,
+              },
+              configProfile
+            )
+            .then((response: any) => {
+              swal
+                .fire({
+                  title: "Berhasil!",
+                  text: "Pengguna berhasil ditambahkan",
+                  icon: "success",
+                  confirmButtonText: "OK",
+                })
+                .then(() => {
+                  router.go(-1);
+                });
+            })
+            .catch((error) => {
+              swal.fire({
+                title: "Gagal!",
+                text: error.response.data.message,
+                icon: "error",
+                confirmButtonText: "OK",
+              });
             });
-          }).catch((error) => {
-            swal.fire({
-              title: "Gagal!",
-              text: error.response.data.message,
-              icon: "error",
-              confirmButtonText: "OK",
-            });
-          });
-        }).catch((error: any) => {
+        })
+        .catch((error: any) => {
           swal.fire({
             title: "Gagal!",
             text: error.response.data.message,
@@ -132,29 +168,34 @@ export default defineComponent({
             confirmButtonText: "OK",
           });
         });
-    }
+    };
 
     return {
       username,
       email,
+      password,
       firstName,
       lastName,
       address,
       phoneNumber,
-      createUser
-    }
+      role,
+      createUser,
+    };
   },
   data() {
     return {
       username: "",
       email: "",
+      password: "",
       firstName: "",
       lastName: "",
       address: "",
       phoneNumber: "",
+      role: "",
     };
   },
+
   methods: {},
-  mounted() { },
+  mounted() {},
 });
 </script>
