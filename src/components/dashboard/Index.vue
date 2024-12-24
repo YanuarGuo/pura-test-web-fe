@@ -46,28 +46,16 @@ export default defineComponent({
     <br />
     <div class="d-flex card-section">
       <Card>
-        <template #header> Anggaran </template>
-        <template #body>
-          Pendapatan : Rp.999.999.999 <br />
-          Belanja : Rp. 999.999.999 <br />
-          Investasi : Rp. 999.999.999 <br />
-        </template>
+        <template #header> Total Ruangan Terpakai </template>
+        <template #body> </template>
       </Card>
       <Card>
-        <template #header> Program Kerja </template>
-        <template #body>
-          Pendapatan : Rp.999.999.999 <br />
-          Belanja : Rp. 999.999.999 <br />
-          Investasi : Rp. 999.999.999 <br />
-        </template>
+        <template #header> Ruangan Paling Banyak Terpakai </template>
+        <template #body> </template>
       </Card>
       <Card>
-        <template #header> Realisasi </template>
-        <template #body>
-          Pendapatan : Rp.999.999.999 <br />
-          Belanja : Rp. 999.999.999 <br />
-          Investasi : Rp. 999.999.999 <br />
-        </template>
+        <template #header> Ruangan Paling Sedikit Terpakai</template>
+        <template #body> </template>
       </Card>
     </div>
     <BarChart />
