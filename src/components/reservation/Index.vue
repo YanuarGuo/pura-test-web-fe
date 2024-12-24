@@ -10,7 +10,6 @@
         :headers="headers"
         :items="items"
         @item-edited="handleEditItem"
-        @item-pinjam="handlePinjamItem"
         @item-deleted="handleDeleteItem"
         @item-ajukan="handleAjukanItem"
         @item-validasi="handleTolakItem"
@@ -113,14 +112,6 @@ export default defineComponent({
       const batas = item.key;
       router.push({
         name: "masterdata-rooms-update",
-        params: { id: batas },
-      });
-    };
-
-    const handlePinjamItem = (item: any) => {
-      const batas = item.room_id;
-      router.push({
-        name: "transactional-reservation-create",
         params: { id: batas },
       });
     };
@@ -292,7 +283,6 @@ export default defineComponent({
       handleEditItem,
       handleDeleteItem,
       handleAjukanItem,
-      handlePinjamItem,
       handleTolakItem,
       handleTerimaItem,
     };

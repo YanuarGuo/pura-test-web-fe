@@ -2,7 +2,7 @@
   <div class="container">
     <h3 style="display: inline-block">Ubah Data Ruangan &nbsp</h3>
     <br />
-    <router-link to="/masterdata/batasbon">
+    <router-link to="/masterdata/rooms">
       <div class="btn btn-sm btn-secondary">Kembali</div>
     </router-link>
     <hr />

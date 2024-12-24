@@ -91,7 +91,7 @@ export default defineComponent({
         purpose: purpose.value,
       };
       await axios
-        .put(`rooms/${props.id}`, payload, {
+        .put(`reservation/${props.id}`, payload, {
           headers: {
             accept: "application/json",
             Authorization: `Bearer ${token}`,
@@ -106,7 +106,7 @@ export default defineComponent({
               confirmButtonText: "OK",
             })
             .then(() => {
-              router.push({ name: "masterdata-rooms" });
+              router.push({ name: "transactional-reservation-update" });
               // location.reload();
             });
         })

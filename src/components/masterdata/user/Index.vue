@@ -5,9 +5,6 @@
     <router-link to="/masterdata/user/create">
       <div class="btn btn-sm btn-primary">Tambah User</div>
     </router-link>
-    <router-link to="/masterdata/role">
-      <div class="btn btn-sm btn-success ms-2">Daftar Role</div>
-    </router-link>
     <hr />
     <div class="mb-5">
       <DataTable
