@@ -17,6 +17,7 @@
         :items="items"
         @item-edited="handleEditItem"
         @item-deleted="handleDeleteItem"
+        @item-pinjam="handlePinjamItem"
       >
       </DataTable>
     </div>
@@ -99,6 +100,16 @@ export default defineComponent({
       });
     };
 
+    const handlePinjamItem = (item: any) => {
+      console.log("item", item);
+
+      const batas = item.key;
+      router.push({
+        name: "transactional-reservation-create",
+        params: { id: batas },
+      });
+    };
+
     const handleDeleteItem = (item: any) => {
       console.log(item);
 
@@ -137,6 +148,7 @@ export default defineComponent({
       items,
       handleEditItem,
       handleDeleteItem,
+      handlePinjamItem,
     };
   },
   method: {},
