@@ -31,6 +31,7 @@ import { swalWithCustomStyles } from "@/plugin/swal";
 import { useRouter } from "vue-router";
 import config from "@/config";
 import date from "@/plugin/date";
+import auth from "@/plugin/auth";
 
 export default defineComponent({
   components: {
@@ -40,6 +41,7 @@ export default defineComponent({
     const crypto = inject<CryptoService>("$crypto")!;
     const axios = inject<AxiosInstance>("$axios")!;
     const router = useRouter();
+    const userProfile = ref<any>([]);
     const swal = inject("$swal") as typeof swalWithCustomStyles;
 
     const headers = ref<Header[]>([
@@ -54,28 +56,58 @@ export default defineComponent({
     const items = ref<Item[]>([]);
 
     const token = crypto.getToken();
-    axios
-      .get("/reservation", {
-        headers: {
-          accept: "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        let no = 0;
-        console.log(response.data.data);
+    axios;
+    if (userProfile.role === "admin") {
+      axios
+        .get("/reservation", {
+          headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          let no = 0;
+          console.log(response.data.data);
 
-        items.value = response.data.data.map((row: any) => ({
-          index: (no += 1),
-          key: row.id,
-          room_id: row.room_id,
-          start_time: date.timeStamptoDate(row.start_time),
-          end_time: date.timeStamptoDate(row.end_time),
-          purpose: row.purpose,
-          status: row.status,
-        }));
-      })
-      .catch((error) => {});
+          items.value = response.data.data.map((row: any) => ({
+            index: (no += 1),
+            key: row.id,
+            room_id: row.room_id,
+            start_time: date.timeStamptoDate(row.start_time),
+            end_time: date.timeStamptoDate(row.end_time),
+            purpose: row.purpose,
+            status: row.status,
+          }));
+        })
+        .catch((error) => {
+          console.error("Error fetching reservations:", error);
+        });
+    } else {
+      axios
+        .get("/reservation/jwt", {
+          headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          let no = 0;
+          console.log(response.data.data);
+
+          items.value = response.data.data.map((row: any) => ({
+            index: (no += 1),
+            key: row.id,
+            room_id: row.room_id,
+            start_time: date.timeStamptoDate(row.start_time),
+            end_time: date.timeStamptoDate(row.end_time),
+            purpose: row.purpose,
+            status: row.status,
+          }));
+        })
+        .catch((error) => {
+          console.error("Error fetching reservations with JWT:", error);
+        });
+    }
 
     const handleEditItem = (item: any) => {
       const batas = item.key;
@@ -97,7 +129,7 @@ export default defineComponent({
       console.log(item);
 
       axios
-        .delete("/rooms/" + item.key, {
+        .delete("/reservation/" + item.key, {
           headers: {
             accept: "application/json",
             Authorization: `Bearer ${token}`,
@@ -107,18 +139,17 @@ export default defineComponent({
           swal
             .fire({
               title: "Berhasil!",
-              text: "Ruangan berhasil dihapus",
+              text: "Reservasi berhasil dihapus",
               icon: "success",
               confirmButtonText: "OK",
             })
             .then(() => {
-              // router.push({ name: "masterdata-validasi" });
               location.reload();
             });
         })
         .catch((error) => {
           swal.fire({
-            title: "Ruangan gagal dihapus!",
+            title: "Reservasi gagal dihapus!",
             text: error.response.data.message,
             icon: "error",
             confirmButtonText: "OK",
@@ -152,7 +183,6 @@ export default defineComponent({
               confirmButtonText: "OK",
             })
             .then(() => {
-              // router.push({ name: "masterdata-validasi" });
               location.reload();
             });
         })
@@ -192,7 +222,6 @@ export default defineComponent({
               confirmButtonText: "OK",
             })
             .then(() => {
-              // router.push({ name: "masterdata-validasi" });
               location.reload();
             });
         })
@@ -232,7 +261,6 @@ export default defineComponent({
               confirmButtonText: "OK",
             })
             .then(() => {
-              // router.push({ name: "masterdata-validasi" });
               location.reload();
             });
         })
@@ -246,9 +274,21 @@ export default defineComponent({
         });
     };
 
+    const getUserProfile = async () => {
+      userProfile.value = await auth.getUserProfile();
+      console.log(userProfile.value);
+    };
+
+    const fetchData = async () => {
+      await getUserProfile();
+    };
+
+    fetchData();
+
     return {
       headers,
       items,
+      userProfile,
       handleEditItem,
       handleDeleteItem,
       handleAjukanItem,

@@ -1,7 +1,6 @@
 import encryptor from "encriptorjs";
-import Cookies from "js-cookie"
-const myKey = "siangaksa123"
-
+import Cookies from "js-cookie";
+const myKey = "peminjamanruang123";
 
 const setToken = (token: Text) => {
   const encryptedText = encryptor.encrypt(token, myKey);
@@ -11,7 +10,7 @@ const setToken = (token: Text) => {
 const getToken = () => {
   let storedToken = null;
   let decryptedText = "";
-  storedToken = Cookies.get('token');
+  storedToken = Cookies.get("token");
   if (storedToken != null) {
     decryptedText = encryptor.decrypt(storedToken, myKey);
   }
@@ -20,5 +19,5 @@ const getToken = () => {
 
 export default {
   setToken,
-  getToken
-}
+  getToken,
+};

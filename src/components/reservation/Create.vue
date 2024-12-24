@@ -57,7 +57,7 @@
           <input class="form-control" type="date" v-model="end_time" required />
         </div>
         <div class="col-4">
-          <label for="capacity">Tujuan</label>
+          <label for="capacity">Tujuan Pemakaian</label>
           <input class="form-control" type="text" v-model="purpose" required />
         </div>
       </div>

@@ -126,22 +126,6 @@ const router = createRouter({
           component: Role,
         },
         {
-          path: "rooms",
-          name: "masterdata-rooms",
-          component: Rooms,
-        },
-        {
-          path: "rooms/create",
-          name: "masterdata-rooms-create",
-          component: RoomsCreate,
-        },
-        {
-          path: "rooms/update/:id",
-          name: "masterdata-rooms-update",
-          component: RoomsUpdate,
-          props: true,
-        },
-        {
           path: "role/create",
           name: "masterdata-role-create",
           component: RoleCreate,
@@ -156,6 +140,22 @@ const router = createRouter({
           path: "akses/:id",
           name: "masterdata-akses",
           component: UserAccess,
+          props: true,
+        },
+        {
+          path: "rooms",
+          name: "masterdata-rooms",
+          component: Rooms,
+        },
+        {
+          path: "rooms/create",
+          name: "masterdata-rooms-create",
+          component: RoomsCreate,
+        },
+        {
+          path: "rooms/update/:id",
+          name: "masterdata-rooms-update",
+          component: RoomsUpdate,
           props: true,
         },
       ],

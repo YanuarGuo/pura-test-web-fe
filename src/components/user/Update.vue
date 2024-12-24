@@ -18,9 +18,7 @@
           <label for="kode">Email</label>
           <div class="input-group mb-2">
             <input class="form-control" type="text" v-model="email" required />
-            <div class="input-group-prepend">
-              <div class="input-group-text">@uksw.edu</div>
-            </div>
+            <div class="input-group-prepend"></div>
           </div>
         </div>
       </div>
@@ -100,7 +98,7 @@ export default defineComponent({
             password: password.value,
           };
           await axios
-            .put(`auth/user/${props.id}`, payload, {
+            .put(`auth/user`, payload, {
               headers: {
                 accept: "application/json",
                 Authorization: `Bearer ${token}`,

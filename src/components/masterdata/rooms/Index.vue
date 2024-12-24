@@ -4,7 +4,10 @@
     <br />
     <small class="text-muted">*) Rooms</small>
     <br />
-    <router-link to="/masterdata/rooms/create">
+    <router-link
+      v-if="userProfile && userProfile.role == 'admin'"
+      to="/masterdata/rooms/create"
+    >
       <div class="btn btn-sm btn-primary mt-2">Tambah</div>
     </router-link>
     <hr />
@@ -29,6 +32,7 @@ import type { AxiosInstance } from "axios";
 import { swalWithCustomStyles } from "@/plugin/swal";
 import { useRouter } from "vue-router";
 import config from "@/config";
+import auth from "@/plugin/auth";
 
 export default defineComponent({
   components: {
@@ -38,14 +42,17 @@ export default defineComponent({
     const crypto = inject<CryptoService>("$crypto")!;
     const axios = inject<AxiosInstance>("$axios")!;
     const router = useRouter();
+    const userProfile = ref<any>([]);
+    console.log("user", userProfile);
+
     const swal = inject("$swal") as typeof swalWithCustomStyles;
 
     const headers = ref<Header[]>([
       { text: "No.", value: "index" },
-      { text: "Nama Room", value: "room_name" },
-      { text: "Lokasi", value: "location" },
+      { text: "Nama Room", value: "room_name", sortable: true },
+      { text: "Lokasi", value: "location", sortable: true },
       { text: "Kapasitas", value: "capacity" },
-      { text: "Deskripsi", value: "description" },
+      { text: "Deskripsi", value: "description", sortable: true },
       { text: "Aksi", value: "editDeleteOperation" },
     ]);
 
@@ -74,6 +81,16 @@ export default defineComponent({
       })
       .catch((error) => {});
 
+    const getUserProfile = async () => {
+      userProfile.value = await auth.getUserProfile();
+      console.log(userProfile.value);
+    };
+
+    const fetchData = async () => {
+      await getUserProfile();
+    };
+
+    fetchData();
     const handleEditItem = (item: any) => {
       const batas = item.key;
       router.push({
@@ -101,7 +118,6 @@ export default defineComponent({
               confirmButtonText: "OK",
             })
             .then(() => {
-              // router.push({ name: "masterdata-validasi" });
               location.reload();
             });
         })
@@ -116,6 +132,7 @@ export default defineComponent({
     };
 
     return {
+      userProfile,
       headers,
       items,
       handleEditItem,

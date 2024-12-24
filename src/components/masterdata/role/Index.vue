@@ -95,7 +95,6 @@ export default defineComponent({
           icon: "success",
           confirmButtonText: "OK",
         }).then(() => {
-          // router.push({ name: "masterdata-validasi" });
           location.reload();
         });
       }).catch((error) => {

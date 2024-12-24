@@ -131,12 +131,15 @@ export default defineComponent({
           menus.value = [
             {
               title: "Master Data",
-              subMenus: [{ title: "rooms", path: "/masterdata/rooms" }],
+              subMenus: [
+                { title: "Rooms", path: "/masterdata/rooms" },
+                { title: "Users", path: "/masterdata/user" },
+              ],
             },
             {
               title: "Reservasi",
               subMenus: [
-                { title: "reservation", path: "/transactional/reservation" },
+                { title: "Reservation", path: "/transactional/reservation" },
               ],
             },
 
@@ -146,12 +149,12 @@ export default defineComponent({
           menus.value = [
             {
               title: "Peminjaman",
-              subMenus: [{ title: "rooms", path: "/masterdata/rooms" }],
+              subMenus: [{ title: "Rooms", path: "/masterdata/rooms" }],
             },
             {
               title: "Reservasi",
               subMenus: [
-                { title: "reservation", path: "/transactional/reservation" },
+                { title: "Reservation", path: "/transactional/reservation" },
               ],
             },
 

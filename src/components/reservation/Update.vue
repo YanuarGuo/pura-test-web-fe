@@ -1,43 +1,30 @@
 <template>
   <div class="container">
-    <h3 style="display: inline-block">Ubah Data Ruangan &nbsp</h3>
+    <h3 style="display: inline-block">Ubah Data Reservasi &nbsp</h3>
     <br />
-    <router-link to="/masterdata/batasbon">
+    <router-link to="/transactional/reservation">
       <div class="btn btn-sm btn-secondary">Kembali</div>
     </router-link>
     <hr />
-    <form @submit.prevent="updateRooms()">
+    <form @submit.prevent="UpdateReservation()">
       <div class="row">
+        <h5>Data Peminjaman</h5>
         <div class="col-4">
-          <label for="room_name">Nama Ruang</label>
+          <label for="room_name">Tanggal Mulai</label>
           <input
             class="form-control"
-            type="text"
-            v-model="room_name"
+            type="date"
+            v-model="start_time"
             required
           />
         </div>
         <div class="col-4">
-          <label for="location">Lokasi</label>
-          <input class="form-control" type="text" v-model="location" required />
+          <label for="location">Tanggal Selesai</label>
+          <input class="form-control" type="date" v-model="end_time" required />
         </div>
         <div class="col-4">
-          <label for="capacity">Kapasitas</label>
-          <input
-            class="form-control"
-            type="number"
-            v-model="capacity"
-            required
-          />
-        </div>
-        <div class="col-4">
-          <label for="description">Deskripsi</label>
-          <input
-            class="form-control"
-            type="text"
-            v-model="description"
-            required
-          />
+          <label for="capacity">Tujuan Pemakaian</label>
+          <input class="form-control" type="text" v-model="purpose" required />
         </div>
       </div>
       <button class="btn btn-sm btn-primary mt-3" type="submit">Simpan</button>
@@ -71,40 +58,37 @@ export default defineComponent({
     const axios = inject<AxiosInstance>("$axios")!;
     const router = useRouter();
     const swal = inject("$swal") as typeof swalWithCustomStyles;
-    const room_name = ref<any>();
-    const location = ref<any>();
-    const capacity = ref<any>();
-    const description = ref<any>();
+    const start_time = ref<any>();
+    const end_time = ref<any>();
+    const purpose = ref<any>();
     const token = crypto.getToken();
 
-    const getRooms = async () => {
+    const getReservation = async () => {
       try {
-        const response = await axios.get(`rooms/${props.id}`, {
+        const response = await axios.get(`reservation/${props.id}`, {
           headers: {
             accept: "application/json",
             Authorization: `Bearer ${token}`,
           },
         });
 
-        room_name.value = response.data.data.room_name;
-        location.value = response.data.data.location;
-        capacity.value = response.data.data.capacity;
-        description.value = response.data.data.description;
+        start_time.value = response.data.data.start_time;
+        end_time.value = response.data.data.end_time;
+        purpose.value = response.data.data.purpose;
       } catch (error) {}
     };
 
     const fetchData = async () => {
-      await getRooms();
+      await getReservation();
     };
 
     fetchData();
 
-    const updateRooms = async () => {
+    const UpdateReservation = async () => {
       const payload = {
-        room_name: room_name.value,
-        location: location.value,
-        capacity: capacity.value,
-        description: description.value,
+        start_time: start_time.value,
+        end_time: end_time.value,
+        purpose: purpose.value,
       };
       await axios
         .put(`rooms/${props.id}`, payload, {
@@ -137,11 +121,10 @@ export default defineComponent({
     };
 
     return {
-      room_name,
-      location,
-      capacity,
-      description,
-      updateRooms,
+      start_time,
+      end_time,
+      purpose,
+      UpdateReservation,
     };
   },
 });

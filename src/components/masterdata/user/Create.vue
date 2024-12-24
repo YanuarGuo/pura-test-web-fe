@@ -42,7 +42,7 @@
         <div class="col-4">
           <label>No. HP : </label>
           <input type="tel" pattern="[0-9]{12}" class="form-control" required v-model="phoneNumber" />
-          <small class="form-text text-muted">Format: 08123456789</small>
+          <small class="form-text text-muted">Format: 08XXXXXXXXXX</small>
         </div>
       </div>
       <button class="btn btn-sm btn-primary mt-3" type="submit">Simpan</button>

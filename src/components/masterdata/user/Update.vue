@@ -11,26 +11,47 @@
       <div class="row">
         <div class="col-4">
           <label>Nama Depan : </label>
-          <input type="text" class="form-control" required v-model="userData.firstName" />
+          <input
+            type="text"
+            class="form-control"
+            required
+            v-model="userData.firstName"
+          />
         </div>
       </div>
       <div class="row mt-2">
         <div class="col-4">
           <label>Nama Belakang : </label>
-          <input type="text" class="form-control" required v-model="userData.lastName" />
+          <input
+            type="text"
+            class="form-control"
+            required
+            v-model="userData.lastName"
+          />
         </div>
       </div>
       <div class="row mt-2">
         <div class="col-4">
           <label>Alamat : </label>
-          <input type="text" class="form-control" required v-model="userData.address" />
+          <input
+            type="text"
+            class="form-control"
+            required
+            v-model="userData.address"
+          />
         </div>
       </div>
       <div class="row mt-2">
         <div class="col-4">
           <label>No. HP : </label>
-          <input type="tel" pattern="[0-9]{12}" class="form-control" required v-model="userData.phoneNumber" />
-          <small class="form-text text-muted">Format: 08123456789</small>
+          <input
+            type="tel"
+            pattern="[0-9]{12}"
+            class="form-control"
+            required
+            v-model="userData.phoneNumber"
+          />
+          <small class="form-text text-muted">Format: 08XXXXXXXXXX</small>
         </div>
       </div>
       <button class="btn btn-sm btn-primary mt-3" type="submit">Simpan</button>
@@ -47,8 +68,7 @@ import { useRouter } from "vue-router";
 import config from "@/config";
 
 export default defineComponent({
-  components: {
-  },
+  components: {},
   props: {
     id: {
       type: String,
@@ -74,7 +94,7 @@ export default defineComponent({
           },
         });
         userData.value = response.data.data;
-      } catch (error) { }
+      } catch (error) {}
     };
 
     const fetchData = async () => {
@@ -85,31 +105,34 @@ export default defineComponent({
 
     const updateUserData = async () => {
       try {
-        await axios.put(`user-profiles/${props.id}`,
-          {
-            firstName: userData.value.firstName,
-            lastName: userData.value.lastName,
-            address: userData.value.address,
-            phoneNumber: userData.value.phoneNumber,
-            unit_id: userData.value.unit_id,
-            sub_unit_id: userData.value.sub_unit_id,
-          },
-          {
-            headers: {
-              accept: "application/json",
-              Authorization: `Bearer ${token}`,
+        await axios
+          .put(
+            `user-profiles/${props.id}`,
+            {
+              firstName: userData.value.firstName,
+              lastName: userData.value.lastName,
+              address: userData.value.address,
+              phoneNumber: userData.value.phoneNumber,
             },
-          }
-        ).then((response) => {
-          swal.fire({
-            title: "Berhasil!",
-            text: "Profil Pengguna berhasil diubah!",
-            icon: "success",
-            confirmButtonText: "OK",
-          }).then(() => {
-            router.go(-1);
+            {
+              headers: {
+                accept: "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          )
+          .then((response) => {
+            swal
+              .fire({
+                title: "Berhasil!",
+                text: "Profil Pengguna berhasil diubah!",
+                icon: "success",
+                confirmButtonText: "OK",
+              })
+              .then(() => {
+                router.go(-1);
+              });
           });
-        });
       } catch (error: any) {
         swal.fire({
           title: "Gagal!",
